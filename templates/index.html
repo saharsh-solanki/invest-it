@@ -93,12 +93,19 @@
                                     <li class="nav-item">
                                         <a class="page-scroll" href="#services">Services</a>
                                     </li>
-                                     <li class="nav-item">
+                                    {% if 'user_email' in request.session %}
+                                        <li class="nav-item">
+                                        <a class="page-scroll" href="{%  url 'dashboard' %}">Dashboard</a>
+                                    </li>
+
+                                    {% else %}
+                                         <li class="nav-item">
                                         <a class="page-scroll" href="{%  url 'register' %}">Register</a>
                                     </li>
                                      <li class="nav-item">
                                         <a class="page-scroll" href="{%  url 'login' %}">Login</a>
                                     </li>
+                                    {% endif %}
                                     
                                 </ul>
                             </div> <!-- navbar collapse -->
