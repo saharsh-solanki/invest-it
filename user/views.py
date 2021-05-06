@@ -20,49 +20,54 @@ from user.models import user_data
 
 def register(request):
     #checking is method is POST or Not and if We Click On The Register Button Then This Code Run
-    if request.method=="POST":
-        #Fetching Data From Form
-        name=request.POST['name']
-        mobile_no = request.POST['mobile_no']
-        email=request.POST['email']
-        password = request.POST['password']
-        #cheching is email is already registered or not
-        if user_data.objects.filter(email=email).exists():
-            msg="Email Is Already Registered"
-            return render(request, "forms/registration_form.html",{'msg':msg})
-        else:
-            #now We Need To Genrate 4 Digit Random Number And Send It To Mail
-            #to genrate random number
-            otp=random.randint(1000,9999)
-            #code To Send Otp To Email
-            subject = "ONE TIME PASSWORD VERIFCTAION CODE"
-            sender = settings.EMAIL_HOST_USER
-            to = email
-            title="OTP FOR EMAIL VERIFCATION "
-            message="One Time Password For Your Account Regitration"
-            ctx = {
-                'title':title,
-                'otp':otp,
-                'content': message,
-            }
-            message = get_template('email.html').render(ctx)
-            msg = EmailMessage(
-                subject,
-                message,
-                sender,
-                [to],
-            )
-            msg.content_subtype = "html"  # Main content is now text/html
-            msg.send()
-            request.session['otp_from_server']=otp
-            request.session['name'] = name
-            request.session['mobile_no'] = mobile_no
-            request.session['email'] = email
-            request.session['password'] = password
-            msag="OTP Sended To Your Email !! Check Span Folder Also"
-            return render(request, "forms/varify-otp.html",{'msg':msag})
+    if 'user_email' in request.session:
+        messages.success(request, "Already Logged In")
+        return redirect('dashboard')
     else:
-        return render(request,"forms/registration_form.html")
+        if request.method=="POST":
+            #Fetching Data From Form
+            name=request.POST['name']
+            mobile_no = request.POST['mobile_no']
+            email=request.POST['email']
+            password = request.POST['password']
+            #cheching is email is already registered or not
+            if user_data.objects.filter(email=email).exists():
+                msg="Email Is Already Registered"
+                return render(request, "forms/registration_form.html",{'msg':msg})
+            else:
+                #now We Need To Genrate 4 Digit Random Number And Send It To Mail
+                #to genrate random number
+                otp=random.randint(1000,9999)
+                #code To Send Otp To Email
+                subject = "ONE TIME PASSWORD VERIFCTAION CODE"
+                sender = settings.EMAIL_HOST_USER
+                to = email
+                title="OTP FOR EMAIL VERIFCATION "
+                message="One Time Password For Your Account Regitration"
+                ctx = {
+                    'title':title,
+                    'otp':otp,
+                    'content': message,
+                }
+                message = get_template('email.html').render(ctx)
+                msg = EmailMessage(
+                    subject,
+                    message,
+                    sender,
+                    [to],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+                request.session['otp_from_server']=otp
+                request.session['name'] = name
+                request.session['mobile_no'] = mobile_no
+                request.session['email'] = email
+                request.session['password'] = password
+                msag="OTP Sended To Your Email !! Check Span Folder Also"
+                return render(request, "forms/varify-otp.html",{'msg':msag})
+        else:
+            return render(request,"forms/registration_form.html")
+
 
 #function for Otp Varification
 def varify_otp(request):
@@ -123,7 +128,7 @@ def resend_reg_otp(request):
             msg.content_subtype = "html"  # Main content is now text/html
             msg.send()
             request.session['otp_from_server'] = otp
-            return render(request, "form/varify-otp.html", {'msg': 'OTP Reseneded'})
+            return render(request, "form/varify-otp.html", {'msg': 'OTP Reseneded !!Check Spam Folder Also'})
 
 
 def reset_password(request):
@@ -157,7 +162,7 @@ def reset_password(request):
             request.session['otp_from_server'] = otp
             request.session['email'] = email
             msg="OTP Sended Successfully"
-            return render(request, "forms/reset_password_varify_otp.html",{'msg':"OTP Re-sended"})
+            return render(request, "forms/reset_password_varify_otp.html",{'msg':"OTP Re-sended !! Check Spam Folder In Case Do Not Recive"})
         else:
             #now We Need To Genrate 4 Digit Random Number And Send It To Mail
             msg = "Email Not Registered "
@@ -243,17 +248,18 @@ def login(request):
 
 #Function for Dashboard
 def dashboard(request):
-    email = request.session['user_email']
-    user_info = user_data.objects.get(email=email)
-    context={
-        'name':user_info.real_name,
-        'balance':user_info.balance,
-            }
-    return render(request,"user/dashboard.html",context)
-#function logoutuser data
+    if 'user_email' in request.session:
+        email = request.session['user_email']
+        user_info = user_data.objects.get(email=email)
+        context = {
+            'name': user_info.real_name,
+            'balance': user_info.balance,
+        }
+        return render(request, "user/dashboard.html", context)
+    else:
+        return redirect('login')
+
 def logout(request):
-    #del request.session['user_name']
-    #del request.session['user_email']
     request.session.flush()
     msg="logout Successfully"
     return render(request,'index.html',{'msg':msg})
