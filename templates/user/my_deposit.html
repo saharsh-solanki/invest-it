@@ -1,0 +1,77 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Test Your Skills{% endblock title %}
+    {% block custom_css %}<style>
+
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+
+
+<div id="content" class="p-4">
+
+
+
+
+
+
+
+      <table class="table table-dark table-striped table-hover">
+  <tr  class="text-center>">
+      <td colspan="6"class="text-center h5" scope="col " >My Deposit</td>
+  </tr>
+    <tr>
+      <th scope="col " >#</th>
+      <th scope="col">ORDER ID</th>
+      <th scope="col">AMOUNT</th>
+      <th scope="col">TXN NAME</th>
+        <th scope="col">STATUS</th>
+        <th scope="col">ORDER FOR</th>
+    </tr>
+  <tbody>
+  {% for data in data %}
+   {% if data is none %}
+    <div class="container box-harsh p-4">
+         <div class="text-dark mb-3"  style="font-size:20px;"> <b> My Deposit</b></div>
+        <div class="text-gray p-auto text-center pt-5 pb-5"  style="font-size:20px;"> <b>
+             <i style="font-size:40px;" class="fa fa-file"></i><br>
+             No Data </b>
+           </div>
+ {% endif %}
+        <tr>
+          <td>{{ data.id }}</td>
+           <td>{{ data.order_id }}</td>
+            <td>${{ data.balance }}</td>
+             <td>{{ data.txn_name }}</td>
+            <td>{% ifequal data.status "Success" %}<p style="color:green;">{{ data.status }}</p>{% else %}<p style="color:red;">{{ data.status }}</p>{% endifequal %}</td>
+             <td>{{ data.order_for }}</td>
+        </tr>
+  {% endfor %}
+          <tr ><td class="text-center" colspan="6">--- No More Data --</td></tr>
+  </tbody>
+</table>
+       <center> <div class="paginator ">
+    <div class="form-group ">
+        {% if data.has_previous %}
+        <a class="btn btn-primary" href="?page={{data.previous_page_number}}">Previous</a>
+        {% endif %}
+         <a class="btn btn-danger text-light" id="current_page_number">{{data.number}}</a>
+        {% if data.has_next %}
+        <a class="btn btn-primary" href="?page={{data.next_page_number}}">Next</a>
+        {% endif %}
+    </div>
+
+</div>
+           </center>
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+{% endblock body_data %}

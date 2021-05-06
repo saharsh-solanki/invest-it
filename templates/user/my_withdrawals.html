@@ -1,0 +1,155 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}My Withdraws{% endblock title %}
+    {% block custom_css %}<style>
+
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+</style>
+
+<div id="content" class="p-4">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+
+
+<div class="container bootdey">
+    <div class="panel panel-default panel-order ">
+        <div class="panel-heading text-white">
+            <strong>Withdrawals</strong>
+            <div class="btn-group pull-right">
+                <div class="btn-group text-white">
+
+                </div>
+            </div>
+
+        </div>
+        <br>
+
+        <div class="panel-body"><br>
+            <!-- Fetching Data of transection hiostoryu  -->
+            {% for data in data %}
+            {% ifequal data.status "success" %}
+            <div class="row bg-white">
+                <div class="col-md-1"><i class="fa fa-check media-object img-thumbnail text-white bg-success p-1" style="font-size:30px;" ></i></div>
+                <div class="col-md-11">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="badge-success rounded p-2 text-center text-white m-1 pull-right"><label class="label label-warning">Success</label></div>
+                            <span ><strong>Amount </strong></span> <span class="label label-info">${{data.withdraw_amount}}</span><br />
+                            Type : withdraw, message : amount is credited To Your Account  <br />
+                           </div>
+                        <br> <div class="col-md-12">Withdraw Date : {{data.date_time }} By : <strong> Team </strong></div>
+                    </div>
+                </div>
+            </div>
+                    {% endifequal %}
+
+            {% ifequal data.status "rejected" %}
+
+            <div class="row bg-white">
+                <div class="col-md-1"><i class="fa fa-times media-object img-thumbnail text-white bg-danger p-2" style="font-size:30px;" ></i></div>
+                <div class="col-md-11">
+                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="badge-danger p-2 rounded text-center text-white m-1 pull-right"><label class="label label-danger">Rejected</label></div>
+                            <span ><strong>Amount </strong></span> <span class="label label-info">${{data.withdraw_amount}}</span><br />
+                            Type : withdraw, message : Error Occured Contact Customer care   <br />
+                           </div>
+                        <br> <div class="col-md-12">Withdraw Date : {{data.date_time }} By : <strong> Team </strong></div>
+                </div>
+            </div>
+            </div>
+                {% endifequal %}
+             {% ifequal data.status "pending" %}
+             <div class="row bg-white">
+                <div class="col-md-1"><i class="fa fa-info-circle media-object img-thumbnail text-white bg-warning p-2" style="font-size:30px;" ></i></div>
+                <div class="col-md-11">
+                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="badge-warning rounded p-2 text-center text-white m-1 pull-right"><label class="label label-warning">Pending</label></div>
+                            <span ><strong>Amount </strong></span> <span class="label label-info">${{data.withdraw_amount}}</span><br />
+                            Type : withdraw, message : Amount Will Be credit To Account  <br />
+                           </div>
+                        <br> <div class="col-md-12">Withdraw Date : {{data.date_time }} By : <strong> Team </strong></div>
+                    </div>
+                </div>
+            </div>
+
+        {% endifequal %}
+
+
+        {% endfor  %}
+</div>
+
+
+
+<style>
+    .panel-order .row {
+	border-bottom: 1px solid #ccc;
+}
+.panel-order .row:last-child {
+	border: 0px;
+}
+.panel-order .row .col-md-1  {
+	text-align: center;
+	padding-top: 15px;
+}
+.panel-order .row .col-md-1 img {
+	width: 50px;
+	max-height: 50px;
+}
+.panel-order .row .row {
+	border-bottom: 0;
+}
+.panel-order .row .col-md-11 {
+	border-left: 1px solid #ccc;
+}
+.panel-order .row .row .col-md-12 {
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+.panel-order .row .row .col-md-12:last-child {
+	font-size: 11px;
+	color: #555;
+	background: #efefef;
+}
+.panel-order .btn-group {
+	margin: 0px;
+	padding: 0px;
+}
+.panel-order .panel-body {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.panel-order .panel-deading {
+	margin-bottom: 0;
+}
+
+</style>
+
+<br>
+       <center> <div class="paginator ">
+    <div class="form-group ">
+        {% if data.has_previous %}
+        <a class="btn btn-outline-info" href="?page={{data.previous_page_number}}">Previous</a>
+        {% endif %}
+         <button class="btn btn-light " id="current_page_number">{{data.number}}</button>
+        {% if data.has_next %}
+        <a class="btn btn-outline-info" href="?page={{data.next_page_number}}">Next</a>
+        {% endif %}
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock body_data %}

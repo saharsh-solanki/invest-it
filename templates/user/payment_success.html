@@ -1,0 +1,37 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Invest Here{% endblock title %}
+    {% block custom_css %}<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+</style>
+
+<div id="content" class="p-4">
+<center>
+    <div class="shadow bg-white b-t-info " style="max-width:500px;">
+        <div class="row">
+            <div class="col pt-4 p-2">
+                <div class="text-success text-large">
+                    <img style="height:200px; width:200px;" src="{% static 'icon/success.gif' %}"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-2 pb-4">
+                <div class="text-success text-large">
+                    Congratulation !! Payment Is Successfully <br>
+                    You Have Successfully Invested ${{amount}} <br><br>
+                    <a href="{% url 'my_investments' %}" class="" style="font-size:small">click here To See full details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+</div>
+
+
+
+
+{% endblock body_data %}

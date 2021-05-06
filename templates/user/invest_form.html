@@ -1,0 +1,52 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Invest Here{% endblock title %}
+    {% block custom_css %}<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+</style>
+
+<div id="content" class="p-4">
+<center>
+    <style type="text/css">
+  .form-control:focus
+{
+         outline: none !important;
+         box-shadow: none;
+         border:1.6px solid black;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+
+</style>
+<div class="bg-white container shadow p-5 rounded bg-white" style="max-width:500px;">
+
+   <form action="{%  url 'make_invest' %}" method="POST">
+    {% csrf_token %}
+       <input type="hidden" name="pay" value="pay">
+            <h1 style="font-family: 'Hanalei Fill', cursive;">{{ plan }}</h1><br>
+
+            <input type="hidden" name="plan" value="{{ plan }}" >
+            <span style="font-size:20px;" class="b"> Interest : <strong>{{interest}}%</strong></span><br><br>
+          <span style="font-size:20px;" class="label-input100"> Duration : <strong>{{month}} Months</strong></span><br><br>
+      <hr>
+     <span class="h5">How Much You Want To Invest ?</span><br><br>
+     <div class="input-group mb-3" style="max-width:300px;">
+      <span class="input-group-text" id="basic-addon1">$</span>
+      <input type="number" class="form-control" name="amount" placeholder="Enter Amount" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <button style="max-width:300px;width:90%;" type="submit" class="btn btn-outline-dark pl-5 pr-5 shadow">Invest </button>
+   <br><br><center><a href="#" style="font-size: small;">Terms & Conditions</a></center>
+       <br>
+   </form>
+</div>
+</center>
+
+</div>
+
+
+
+
+{% endblock body_data %}

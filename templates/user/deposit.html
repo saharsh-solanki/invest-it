@@ -1,0 +1,47 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Deposit{% endblock title %}
+    {% block custom_css %}<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+
+
+<div id="content" class="p-4">
+
+
+    <script>
+$(document).ready(function(){
+	$('#close').click(function(){
+	    $(".closess").toggle(500);
+	})
+});
+</script>
+{% for messages in messages %}
+   <div class="alert alert-warning p-4 closess" role="alert">
+  <strong>{{ messages }}</strong>
+  <button id="close" type="button" class="btn btn-light " style="margin-right:;margin-top:-7px;float:right;fixed:top;">x</button><br><br>
+       <button class="btn btn-link" style="text-decoration:none;">Show Transection Details</button>
+</div>
+ {% endfor %}
+
+
+
+    <div class="container box-harsh p-4">
+         <form action="{% url 'deposit' %}" method="POST">
+             {% csrf_token %}
+             <div class="text-dark mb-3"  style="font-size:20px;"><b> Available Balance : ${{balance}} </b></div><br>
+             <div class="text-gray mb-3"  style="font-size:20px;"><b> Enter Prefered Amount </b></div><br>
+            <div class="input-group mb-3" style="width:80%;">
+              <span class="input-group-text">$</span>
+              <input type="text" class="form-control" placeholder="Enter Amount" name="amount">
+            </div><br>
+             <button type="submit" class="btn btn-info rounded-pill" style="width:30%;">Deposit</button>
+          </form>
+    </div>
+
+</div>
+
+
+
+
+{% endblock body_data %}

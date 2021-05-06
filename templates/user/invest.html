@@ -1,0 +1,62 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Invest{% endblock title %}
+    {% block custom_css %}<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+.btn{
+background: #599fd9;
+background-image: linear-gradient( 135.9deg, rgba(109,25,252,1) 16.4%, rgba(125,31,165,1) 56.1% );
+color:white;
+ transition: all .4s ease-out;
+ background-size: 200% 100%;
+  background-position: left bottom;
+}
+.btn:hover{
+background-position: right top;
+
+
+}
+
+</style>
+
+<div id="content" class="p-4">
+
+
+<br>
+<center>
+ <div class="container box-harsh p-4">
+<div class="p-2" style="font-family: 'Hanalei Fill', cursive;letter-spacing: 2px; font-size:27px;"> START INVESTING   </div>
+</div>
+
+<!--  -->
+
+<div class="row">
+  <div class="col-sm m-1">
+    <div class="card shadow rounded p-3" style="max-width: 30rem;">
+      <div class="card-body">
+        <h5 class="card-title rounded" >Flexible Deposit </h5><br>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content</p><br>
+        <a href="{% url 'flx_deposit' %}" class="shadow rounded btn btn-outline-dark pl-5 pr-5 shadow rounded-pill ">Invest</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm m-2">
+   <div class="card shadow rounded p-3" style="max-width: 30rem;">
+      <div class="card-body">
+        <h5 class="card-title rounded" >Locked  Deposit </h5><br>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content</p><br>
+        <a href="{% url 'lock_deposit' %}" class="shadow rounded btn btn-outline-dark pl-5 pr-5 shadow rounded-pill ">Invest</a>
+      </div>
+    </div>
+</div>
+
+</div>
+
+</center>
+
+
+
+{% endblock body_data %}

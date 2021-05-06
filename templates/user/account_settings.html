@@ -1,0 +1,52 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Account Settings{% endblock title %}
+    {% block custom_css %}<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+
+
+<div id="content" class="p-4">
+
+<script type="text/javascript">
+  $(document).ready(function(){
+       $('#form_toggle_login').click(function(){
+       $('#form_toggle_data1').show();
+       $('#form_toggle_data2').hide();
+       });
+        $('#form_toggle_register').click(function(){
+       $('#form_toggle_data2').show();
+       $('#form_toggle_data1').hide();
+       });
+});
+</script>
+  <div class="container">
+      <div class="row">
+        <div class="col">
+          <a href="#" class="btn btn-light m-2 "id="form_toggle_login" style="">E-KYC</a>
+        </div>
+        <div class="col">
+         <a href="#" class="btn btn-light m-2"  id="form_toggle_register"> Bank Update</a>
+        </div>
+      </div>
+      <div class="row box-harsh p-4 text-center">
+        <div class="col-sm" id="form_toggle_data1">
+         Details Like E-kyc Should Be Here !!
+
+        </div>
+        <div class="col-sm" style="display:none;" id="form_toggle_data2">
+          Bank Update Here
+        </div>
+      </div>
+  </div>
+<br><br>
+
+
+
+
+</div>
+
+
+
+
+{% endblock body_data %}

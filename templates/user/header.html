@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap 4 Sidebar Menu Responsive with Sub menu  Create Responsive Side Navigation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  .form-control:focus{
+  box-shadow:none;
+}
+    body {
+  background: #599fd9;
+  background-image: linear-gradient( 135.9deg,  rgba(109,25,252,1) 16.4%, rgba(125,31,165,1) 56.1% );
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+ .vertical-nav {
+  max-width: 15rem;
+  width: 17rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+.page-content {
+  width: calc(100% - 15rem);
+  margin-left: 15rem;
+  transition: all 0.4s;
+}
+
+#sidebar.active {
+  margin-left: -17rem;
+}
+
+#content.active {
+  width: 100%;
+  margin: 0;
+}
+
+.separator {
+  margin: 3rem 0;
+  border-bottom: 1px dashed #fff;
+}
+
+.text-uppercase {
+  letter-spacing: 0.1em;
+}
+.text-gray {
+  color: #aaa;
+}
+.nav-link{
+    text-transform: capitalize;
+}
+.nav-link:hover{
+    background:#f3f2f2;
+}
+.text-primary{
+    color:#7579e7 !important;
+}
+@media (min-width: 768px) {
+    #sidebarCollapse{
+    display:none;
+    }
+
+ #content {
+     margin-left: 15rem;
+    width: calc(100% - 15rem);
+  }
+}
+@media (max-width: 768px) {
+#sidebarCollapse{
+    display: block;
+    }
+  #sidebar {
+    margin-left: -17rem;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+  #content {
+    width: 100%;
+    margin: 0;
+
+  }
+  #content.active {
+    margin-left: 17rem;
+    width: calc(100% - 17rem);
+    z-index:-30px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Vertical navbar -->
+<div class="vertical-nav bg-white" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center">
+      <img loading="lazy" src="https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png" alt="..." width="80" height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+      <div class="media-body">
+        <h4 class="m-0">Invester</h4>
+        <p class="font-weight-normal text-muted mb-0">{{ request.session.user_name }}</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Options</p>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="{% url 'dashboard' %}" class="nav-link text-dark bg-light">
+                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+           Dashboard
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="{% url 'invest' %}" class="nav-link text-dark">
+                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                Invest
+            </a>
+    </li>
+
+  </ul>
+
+
+  <ul class="nav flex-column bg-white mb-0">
+<li class="nav-item">
+      <a href="{% url 'my_investments' %}" class="nav-link text-dark">
+                <i class="fa fa-pie-chart mr-3 text-primary fa-fw"></i>
+                My Investments
+            </a>
+    </li>
+    <li class="nav-item">
+      <a href="{% url 'withdraw' %}" class="nav-link text-dark">
+                <i class="fa fa-sign-out mr-3 text-primary fa-fw"></i>
+                Withdraw
+            </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="{% url 'transection_history' %}" class="nav-link text-dark">
+                <i class="fa fa-history mr-3 text-primary fa-fw"></i>
+                Transaction History
+            </a>
+    </li>
+          <li class="nav-item">
+      <a href="{% url 'profile' %}" class="nav-link text-dark">
+                <i class="fa fa-user mr-3 text-primary fa-fw"></i>
+                Profile
+            </a>
+    </li>
+      <li class="nav-item">
+      <a href="{% url 'refer' %}" class="nav-link text-dark">
+                <i class="fa fa-users mr-3 text-primary fa-fw"></i>
+                Referals
+            </a>
+    </li>
+  </ul>
+</div>
+<!-- End vertical navbar -->
+
+
+<!-- Page content holder -->
+<div class="page-content pt-4 pl-1" id="content">
+  <!-- Toggle button -->
+      <button id="sidebarCollapse" type="button" class="navbar-toggler btn btn-light bg-white rounded-pill shadow-sm px-3 mb-4"><i class="fa fa-bars "></i></button>
+</div>
+
+
+
+
+<script>
+    $(function() {
+  $('#sidebarCollapse').on('click', function() {
+    $('#sidebar, #content').toggleClass('active');
+
+  });
+
+});
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+</body>
+</html>

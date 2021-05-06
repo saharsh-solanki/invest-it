@@ -1,0 +1,92 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Invest Here{% endblock title %}
+    {% block custom_css %}<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+</style>
+
+<div id="content" class="p-4">
+<center>
+    <style type="text/css">
+  .form-control:focus
+{
+         outline: none !important;
+         box-shadow: none;
+         border:1.6px solid black;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+.form-control{
+border:none;
+background:#eee;
+
+}
+.form-control:hover{
+border:none;
+background:#eee;
+}
+.form-control:focus{
+border:none;
+background:#eee;
+}
+.input-group-text{
+border:none;
+background:#eee;
+}
+</style>
+
+ </center>
+
+    <center>
+    {% for messages in messages %}
+    {% ifequal messages.tags 'error' %}
+    <div class="alert-danger p-3" style="max-width:200px;">{{ messages }}</div><br>
+    {% else %}
+    <div class="alert-success p-3">{{ messages }}</div><br>
+    {% endifequal %}
+    {% endfor %}
+</center>
+
+<div class=" container  bg-dark shadow p-4 rounded " style="max-width:500px;">
+    <div class="row"><div class="col">
+        <a href="{% url 'my_withdrawals' %}" class=" btn btn-sm btn-light shadow b-3 m-1 pull-right ">My Withdraw</a>
+        </div>
+    </div>
+    <div class="row" style="margin-top:-10px;">
+    <div class="bg text-white col-lg p-3 m-2 text-center" >Referal Balance : <i class=" fa fa-dollar text-white" style="font-size:15px;"></i> {{obj.refer_balance|floatformat:4}}</div>
+    </div>
+    <div class="bg-white shadow  text-white col p-4"><br>
+            <form action="{% url 'refer_withdraw_done' %}" method="POST">
+                {% csrf_token %}
+            <div class=" text-danger text-center " style="margin-top:-30px;font-weight:600;dont-size:24px;letter-spacing:3px;word-spacing:4px;">Withdraw Money</div><br>
+            <span class="text-dark pl-3 b-4 ">Enter Paypal Email :</span><br>
+            <div class="input-group mt-2 mb-4">
+                    <span class="input-group-text ">
+                        <i class="fa fa-paypal"></i>
+                    </span>
+                <input type="text" class="form-control" placeholder="Paypal Email" name="paypal_email">
+            </div>
+            <span class="text-dark pl-3 b-4">Enter Amount :</span><br>
+            <div class="input-group mt-2 mb-4">
+                    <span class="input-group-text ">
+                        <i class="fa fa-dollar"></i>
+                    </span>
+                <input type="text" class="form-control  " placeholder="Min. $100" name="amount" >
+            </div><center>
+           <button type="submit" class="btn btn-danger shadow " style="width:90%;max-width:200px;">Withdraw</button>
+            </center>
+
+            </form>
+    </div>
+
+    </div>
+
+</div>
+
+
+
+
+{% endblock body_data %}

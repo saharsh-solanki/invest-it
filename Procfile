@@ -1,0 +1,1 @@
+web: gunicorn Investit.wsgi --log-file -
