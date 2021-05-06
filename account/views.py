@@ -283,9 +283,12 @@ def make_invest(request):
                     refbalance = (float(amount) / 100) * 1.5
                     finalreferbalance = referbalance + refbalance
                     refcode = o.refer_code
-                    oob = user_data.objects.get(id=refcode)
-                    oob.refer_balance = finalreferbalance
-                    oob.save()
+                    if refcode=="NULL":
+                        pass
+                    else:
+                        oob = user_data.objects.get(id=refcode)
+                        oob.refer_balance = finalreferbalance
+                        oob.save()
                     try:
                         charges = stripe.Charge.create(
                             shipping={
