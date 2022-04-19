@@ -81,11 +81,22 @@ WSGI_APPLICATION = 'Investit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
+#         'ENGINE': 'django.db.backends.sqlite3',
+
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
-        'ENGINE': 'django.db.backends.sqlite3',
-
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "d5vnc230s694id",
+        'USER': 'inaaibirrybwju',
+        'PASSWORD': '4ee63ac7e3432bd45c5803ec562a75907879f2e19bafee7e064e7bd9aed8a90f',
+        'HOST': "ec2-54-163-254-204.compute-1.amazonaws.com",
+        'PORT': '5432',
     }
 }
 
