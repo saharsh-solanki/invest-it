@@ -1,0 +1,58 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}My Investment{% endblock title %}
+    {% block custom_css %}<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+</style>
+<div id="content" class="p-4">
+
+
+    <div class="container shadow bg-white p-3 rounded text-center">
+         <div class="container-fluid " >
+            <div class="row">
+                <div class="col p-3 m-2 bg-dark text-white shadow" style="background-color:#eee;">Total Profit : ${{total_profit|floatformat:3}}</div>
+                <div class="col p-3 m-2 bg-dark text-white shadow" style="background-color:#eee;">Amount Invested : ${{ obj.amount|floatformat:2 }} </div>
+                <div class="col p-3 m-2 bg-dark text-white shadow" style="background-color:#eee;"> Profit Per Day : ${{ profit_day|floatformat:6 }}</div>
+            </div>
+
+        </div>
+        <div class="row" style="font-size:18px;">
+            <div class="col p-4 bg-light shadow m-4" style="background-color:#eee;">Plan :<br> <strong style="font-size:22px;">{{ obj.plan }}</strong></div>
+            <div class="col p-4 bg-light shadow m-4" style="background-color:#eee;">Type :<br> <strong style="font-size:22px;">{{ obj.invest_type }} Investment</strong></div>
+        </div>
+        <div class="row" style="font-size:18px;">
+ <div class="col p-4 shadow m-4 bg-light" style="background-color:#eee;">ORDER ID :<br> <strong style="font-size:22px;">{{ obj.invest_id }}</strong></div>
+            <div class="col p-4 bg-light shadow m-4" style="background-color:#eee;">Interest :<br> <strong style="font-size:22px;">{{ obj.intrest }} %</strong></div>
+        </div>
+        <div class="row" style="font-size:18px;">
+            <div class="col p-4 bg-light shadow m-4" style="background-color:#eee;">Duration :<br> <strong style="font-size:22px;">{{ obj.month }} Month</strong></div>
+              <div class="col p-4 text-center bg-light shadow m-4" style="background-color:#eee;">Invested On :<br> <center><strong style="font-size:22px;"><p style="max-width:150px;" class="text-center"> {{ obj.date_time }}</p> </strong></div>
+
+        </div>
+
+        <br>
+
+
+    </div>
+
+
+
+
+
+
+</center>
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock body_data %}

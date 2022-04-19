@@ -1,0 +1,65 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}My Investment{% endblock title %}
+    {% block custom_css %}<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+</style>
+<div id="content" class="p-4">
+
+<center>
+     <div class="container box-harsh p-4">
+<div class="p-3 h1 " style="font-family: 'Hanalei Fill', cursive;letter-spacing: 2px;"> My Investments   </div>
+</div>
+
+
+    {% for  data in obj %}
+<div class="row m-3 bg-white shadow rounded text-left p-3">
+  <div class="col-lg p-1">
+   <span style="font-weight: 100px;"> Type : </span>
+    <span class="" style="font-size:17px;">
+      {{ data.invest_type }}
+    </span><br>
+   </div>
+   <div class="col-lg p-1">
+    <span> Plan :</span>
+    <span class="" style="font-size:17px;">
+      {{ data.plan }}
+    </span>
+  </div>
+  <div class="col-lg p-1">
+    <span> Amount :</span>
+    <span class="" style="font-size:17px;">
+      <i class="fa fa-dollar"></i> {{ data.amount }}
+    </span>
+  </div>
+  <div class="col-lg p-1">
+   <span> Date :</span>
+    <span class="" style="font-size:17px;">
+      {{ data.date_time }}
+    </span><br><br>
+
+   </div>
+   <div class="col-lg pt-4">
+    <a href="{% url 'full_details' id=data.id %}" class="btn-outline-dark btn pl-5 pr-5 ">View Details</a>
+   </div>
+</div>
+
+{% endfor  %}
+
+
+</center>
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock body_data %}

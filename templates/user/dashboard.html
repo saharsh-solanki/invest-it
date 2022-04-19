@@ -1,0 +1,159 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock title %}
+    {% block custom_css %}<style>
+
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+
+<script>
+    $(function() {
+  $('#sidebarCollapse').on('click', function() {
+
+  });
+
+});
+
+</script>
+
+
+<div id="content" class="p-4">
+
+<br>
+ <div class="container-fluid">
+              <div class="row bg-white has-shadow p-3">
+                <!-- Item -->
+                <div class="col-xl-4 col-sm-7 p-2">
+                  <div class="item d-flex align-items-center">
+                    <div class="icon  p-1 m-2"style="background: #796AEE !important;height: 40px;width:30px;text-align: center;min-width: 40px;max-width:50px;border-radius: 50%;" >
+                        <i class="fa fa-coins p-1" style="font-size:22px;color:#fff;"></i>
+                    </div>
+                    <div class="title p-2" style="font-size: 15px;font-weight: 400;color: #777;"><span>Total<br>Balance</span>
+
+                    </div>
+                    <div class="number p-2" style="font-size:20px;"><strong>${{ balance|floatformat:2 }}</strong></div>
+                  </div>
+                </div>
+                <!-- Item -->
+                <div class="col-xl-4 col-sm-7 p-2">
+
+                  <div class="item d-flex align-items-center">
+                    <div class="icon  p-1 m-2"style="background: #796AEE !important;height: 40px;width:30px;text-align: center;min-width: 40px;max-width:50px;border-radius: 50%;" >
+                        <i class="fas fa-hand-holding-usd p-1" style="font-size:22px;color:#fff;"></i>
+                    </div>
+                        <div class="title p-2" style="font-size: 15px;font-weight: 400;color: #777;"><span>Total <br>Earning</span>
+
+                    </div>
+                    <div class="number p-2" style="font-size:20px;"><strong>${{total_earning|floatformat:3}}</strong></div>
+                  </div>
+                </div>
+                <!-- Item -->
+                <div class="col-xl-4 col-sm-7 p-2">
+                  <div class="item d-flex align-items-center">
+                    <div class="icon  p-1 m-2"style="background: #796AEE !important;height: 40px;width:70px;text-align: center;min-width: 40px;max-width:30px;border-radius: 50%;" >
+                        <i class="fa fa-dollar-sign p-1" style="font-size:22px;color:#fff;"></i>
+                    </div>
+                      <div class="title p-2" style="font-size: 14px;font-weight: 400;color: #777;"><span style="font-size:12px;">Withdrawable</span><br><span>Balance</span></span>
+
+                    </div>
+                    <div class="number p-2" style="font-size:18px;"><strong>${{ withdrawable_balance|floatformat:3 }}</strong></div>
+                  </div>
+                </div>
+              </div>
+
+    </div>
+    <br>
+
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light", // "light1", "light2", "dark1", "dark2"
+	title:{
+		text: "Earning Chart"
+	},
+	axisY: {
+		title: "Earning"
+	},
+	data: [{
+		type: "line",
+		showInLegend: true,
+		legendMarkerColor: "grey",
+		legendText: "Days",
+		dataPoints: [
+			{ y: 0, label: "wednessday" },
+			{ y: 0,  label: "yesterday" },
+			{ y: 10,  label: "today" }
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+
+    <script src="https://kit.fontawesome.com/673a9f6eb5.js" crossorigin="anonymous"></script>
+<div class="row m-1">
+
+    <div class="col-lg-7">
+    <div id="chartContainer" class="" style="height: 300px; width: 100%;"></div>
+        <br><br>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
+
+        <div class="col-lg-5 p-2 mb-1">
+            <div class="shadow p-3 bg-light">
+          <span class="h4 text-monospace">Q. Want To Invest ?</span><br><br>
+            <center><a href="{% url 'invest' %}" class="btn btn-outline-info shadow rounded-pill pl-4 pr-4">Start Investing</a><br>
+        <span> Read T&C Carefully</span></center>
+                </div>
+            <div class="shadow p-3 bg-light mt-1">
+            <span class="h4 text-monospace"> Read About Investment</span><br><br>
+            <center><a href="{% url 'invest' %}" class="btn btn-outline-danger shadow rounded-pill pl-4 pr-4">Read</a><br>
+        <span> Read T&C Carefully</span></center>
+            </div>
+        </div>
+    </div>
+
+
+
+<br>
+
+
+<!-- Investment Data Will Be Show Here -->
+    <div class="container box-harsh p-4">
+         <div class="text-dark mb-3"  style="font-size:20px;"> <b>Current Investments</b></div>
+        {% for investment in invest_det %}
+        {% ifequal investment.id '' %}
+         <div class="text-gray p-auto text-center pt-5 pb-5"  style="font-size:20px;"> <b>
+             <i style="font-size:40px;" class="fa fa-file"></i><br>
+             No Data </b>
+           </div>
+        {% else %}
+        <div class="row bg-light shadow p-3 m-1 text-center">
+            <div class="col">
+                <strong>Plan : </strong> {{ investment.plan }}
+            </div>
+            <div class="col">
+                <a class="btn btn-light" href="{% url 'my_investments' %}" style="background:#eee;">View More >> </a>
+            </div>
+        </div>
+        {% endifequal %}
+        {% endfor %}
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+{% endblock body_data %}

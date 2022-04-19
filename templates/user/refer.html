@@ -1,0 +1,159 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Refer & Earn{% endblock title %}
+    {% block custom_css %}<style>
+
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+<script>
+ // COPY TO CLIPBOARD
+// Attempts to use .execCommand('copy') on a created text field
+// Falls back to a selectable alert if not supported
+// Attempts to display status in Bootstrap tooltip
+// ------------------------------------------------------------------------------
+
+function copyToClipboard(text, el) {
+  var copyTest = document.queryCommandSupported('copy');
+  var elOriginalText = el.attr('data-original-title');
+
+  if (copyTest === true) {
+    var copyTextArea = document.createElement("textarea");
+    copyTextArea.value = text;
+    document.body.appendChild(copyTextArea);
+    copyTextArea.select();
+    try {
+      var successful = document.execCommand('copy');
+      var msg = successful ? 'Copied!' : 'Whoops, not copied!';
+      el.attr('data-original-title', msg).tooltip('show');
+    } catch (err) {
+      console.log('Oops, unable to copy');
+    }
+    document.body.removeChild(copyTextArea);
+    el.attr('data-original-title', elOriginalText);
+  } else {
+    // Fallback if browser doesn't support .execCommand('copy')
+    window.prompt("Copy to clipboard: Ctrl+C or Command+C, Enter", text);
+  }
+}
+
+$(document).ready(function() {
+  // Initialize
+  // ---------------------------------------------------------------------
+
+  // Tooltips
+  // Requires Bootstrap 3 for functionality
+  $('.js-tooltip').tooltip();
+
+  // Copy to clipboard
+  // Grab any text in the attribute 'data-copy' and pass it to the
+  // copy function
+  $('.js-copy').click(function() {
+    var text = $(this).attr('data-copy');
+    var el = $(this);
+    copyToClipboard(text, el);
+  });
+});
+</script>
+
+<div id="content" class="p-4">
+<center>
+    {% for messages in messages %}
+    {% ifequal messages.tags 'error' %}
+    <div class="alert-danger p-3" style="max-width:200px;">{{ messages }}</div><br>
+    {% else %}
+    <div class="alert-success p-3">{{ messages }}</div><br>
+    {% endifequal %}
+    {% endfor %}
+</center>
+
+    <div class="row bg-white rouned shadow p-1">
+        <div class="col-lg p-2 bg-light rouneded text-center pt-3">
+           <strong> Balance</strong> : ${{obj.refer_balance|floatformat:3}}
+        </div>
+        <div class="col-lg p-2  ">
+            <center>
+            <a class="btn btn-dark"  href="{% url 'refer_withdraw' %}">Withdraw</a>
+                </center>
+        </div>
+    </div>
+
+    <center>
+    <div class="row">
+        <div class="col-lg m-2">
+           <section class="bg-white shadow rounded p-5 pt-5">
+                   <img loading="lazy" src="https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png" alt="..." width="80" height="80" class="mr-3  rounded-circle img-thumbnail shadow-sm ">
+                    <p class="mt-3" >Share Your Code With your Friends or Family Member And Earn 1.5% Profit On Every Investment of Your Friend</p>
+                    <div class="contact">
+                       <strong>Invitation Code</strong> <br><br>
+                      <div class="btn-group">
+
+                        <div class="btn btn-light" style="background:#eee;">Refer Code : {{obj.id}}</div>
+                        <button type="button" class="btn btn-dark text-white js-tooltip js-copy" sdata-toggle="tooltip" data-placement="bottom" data-copy="{{obj.id}}" title="Copy to clipboard">
+                        <i class="fa fa-clipboard"></i>
+                        </button>
+                      </div>
+                    </div>
+            </section>
+        </div>
+        <div class="col-lg m-2  bg-white shadow rounded p-3 pt-3 " style="background:#eee;"><br>
+            {% ifequal refered 'NULL' %}
+            <form  action="{% url 'add_refer' %}" method="POST">
+                {% csrf_token %}
+                <span style="font-size:12px;color:green;">Add Your Freinds Refer Code</span>
+                <div class="input-group mb-3" style="max-width:300px;">
+                  <input type="text" name="rc" class="form-control" placeholder="Enter Invitation Code">
+                  <button class="btn btn-dark" type="submit" id="button-addon2">Add</button>
+                </div>
+            </form>
+            {% endifequal %}
+             <div class="text-warning" style="font-weight:900;letter-spacing:1.5px;">Share Refer Code</div>
+                  <div class="btn-group">
+                      <a href="whatsapp:Join Me On /n My Refer Code Is : {{obj.id}}" type="button" class="btn btn-success text-white">  <i class="fa fa-whatsapp"></i> </a>
+                      <a href="whatsapp:Join Me On /n My Refer Code Is : {{obj.id}}" class="btn btn-success shadow">Share on whatsapp</a>
+                  </div><br><br>
+                <div class="btn-group">
+                      <a href="whatsapp:Join Me On /n My Refer Code Is : {{obj.id}}" type="button" class="btn btn-info text-white">  <i class="fa fa-facebook"></i> </a>
+                      <a href="whatsapp:Join Me On /n My Refer Code Is : {{obj.id}}" class="btn btn-info shadow">Share on facebook</a>
+                  </div><br><br>
+                <div class="btn-group">
+                      <a href="whatsapp:Join Me On /n My Refer Code Is : {{obj.id}}" type="button" class="btn btn-primary text-white">  <i class="fa fa-twitter"></i> </a>
+                      <a href="whatsapp:Join Me On /n My Refer Code Is : {{obj.id}}" class="btn btn-primary shadow">Share on twitter</a>
+                  </div>
+
+        </>
+    </div>
+</center>
+<div class=" p-3 text-white" style="font-size: large">
+    <div class="badge badge-info">My Invitaions</div><br>
+    <div class="row border-bottom border-3 border-dark">
+        <div class="col p-2">
+            Name
+        </div>
+        <div class="col p-2">
+            STATUS
+        </div>
+
+    </div>
+    {% for ref in r %}
+    <div class="row p-1">
+        <div class="col p-2">
+            <i class=" fa fa-user-circle text-white bg-info p-1  rounded-pill" style="font-size:20px;"></i>
+              {{ ref.real_name }}
+        </div>
+        <div class="col p-2">Refer Success</div>
+        </div>
+        {% endfor %}
+
+
+
+</div>
+<script>
+    {% if msg is not None %}
+        window.alert({{ msg }});
+    {% endif %}
+</script>
+
+</div>
+
+{% endblock body_data %}

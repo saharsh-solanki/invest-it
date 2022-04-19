@@ -1,0 +1,76 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}Invest Here{% endblock title %}
+    {% block custom_css %}<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');</style> {% endblock custom_css %}
+{% block body_data %}
+{% include 'user/header.html' %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+</style>
+
+<div id="content" class="p-4">
+<center>
+    <style type="text/css">
+  .form-control:focus
+{
+         outline: none !important;
+         box-shadow: none;
+         border:1.6px solid black;
+}
+button.stripe-button-el,
+button.stripe-button-el>span {
+  background-color: #EB649C !important;
+  background-image: none;
+  padding-left:30px;
+  padding-right:30px;
+
+}
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&display=swap');
+
+</style>
+    <div class="bg-white container shadow p-5 rounded bg-white" style="max-width:500px;font-size:20px;">
+    <span>Plan : {{plan}}</span><br><br>
+    <span>Intrest : {{interest}}%</span><br><br>
+
+    <span>month : {{month}}</span><br><br>
+    <span>amount : ${{amount}}</span><br><br>
+    <form action="{% url 'make_invest' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="create_order" value="True">
+        <input type="hidden" name="pay" value="false">
+        <input type="hidden" name="plan" value="{{plan}}">
+        <input type="hidden" name="interest" value="{{interest}}">
+        <input type="hidden" name="month" value="{{month}}">
+        <input type="hidden" name="amount" value="{{amount}}">
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="{{ key }}"
+          data-description="{{plan}}"
+          data-amount="{{amount_pay}}"
+          data-label="Proceed To Pay"
+          data-locale="auto"></script>
+    </form>
+
+</div>
+
+
+<script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".stripe-button-el span").remove();
+            $("button.stripe-button-el").removeAttr('style').css({
+                "display":"inline-block",
+                "width":"100%",
+                "padding":"15px",
+                "background":"#3fb0ac",
+                "color":"white",
+                "font-size":"1.3em" }).html("Sign Me Up!");
+        });
+</script>
+</center>
+
+</div>
+
+
+
+
+{% endblock body_data %}

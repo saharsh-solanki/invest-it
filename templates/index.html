@@ -1,0 +1,468 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    
+    <!--====== Title ======-->
+    <title>Invest It</title>
+    
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/png">
+        
+    <!--====== Slick CSS ======-->
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+        
+    <!--====== Line Icons CSS ======-->
+    <link rel="stylesheet" href="{% static 'assets/css/lineicons.css' %}">
+        
+    <!--====== Line Icons CSS ======-->
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+        
+    <!--====== Animate CSS ======-->
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+        
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    
+    <!--====== Default CSS ======-->
+    <link rel="stylesheet" href="{% static 'assets/css/default.css' %}">
+    
+    <!--====== Style CSS ======-->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    
+</head>
+
+<body>
+    <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+   
+    
+    
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--====== PRELOADER PART ENDS ======-->    
+    
+    <!--====== HEADER PART START ======-->
+    
+    <header class="header_area">        
+        <div class="header_navbar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="{% static 'assets/images/logo.png' %}" alt="Logo">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a class="page-scroll" href="#home">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#about">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#services">Services</a>
+                                    </li>
+                                    {% if 'user_email' in request.session %}
+                                        <li class="nav-item">
+                                        <a class="page-scroll" href="{%  url 'dashboard' %}">Dashboard</a>
+                                    </li>
+
+                                    {% else %}
+                                         <li class="nav-item">
+                                        <a class="page-scroll" href="{%  url 'register' %}">Register</a>
+                                    </li>
+                                     <li class="nav-item">
+                                        <a class="page-scroll" href="{%  url 'login' %}">Login</a>
+                                    </li>
+                                    {% endif %}
+                                    
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                            
+                            <div class="navbar-btn d-none d-sm-inline-block">
+                                <a class="main-btn" data-scroll-nav="0" href="{%  url 'register' %}">Get Started</a>
+                            </div>
+                        </nav> <!-- navbar -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- header navbar -->
+        
+        <div id="home" class="header_slider">
+            <div class="container-fluid">
+                <div class="slider-active">
+                    <div class="single_slider bg_cover d-flex align-items-center" style="background-image: url({% static 'assets/images/slider-1.jpg' %})">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="slider_content">
+                                        <h2 class="slider_title" data-animation="fadeInUp" data-delay="0.2s">You are using free lite version of Financio</h2>
+                                        <p data-animation="fadeInUp" data-delay="0.6s">Please, purchase full version to get all pages, features and permission to remove footer credit</p>
+                                        <a class="main-btn" href="https://rebrand.ly/financio-ud" data-animation="fadeInUp" data-delay="1s">Purchase Now</a>
+                                    </div> <!-- slider content -->
+                                </div>
+                            </div> <!-- row -->
+                        </div> <!-- container -->
+                    </div> <!-- single slider -->
+                    
+                </div> <!-- slider Active -->
+            </div> <!-- container fluid -->
+        </div> <!-- header slider -->
+    </header>
+    
+    <!--====== HEADER PART ENDS ======-->
+
+    <!--====== BRAND PART START ======-->
+
+    <section class="brand_area pt-30 pb-50">
+        <div class="container">
+            <div class="brand_single d-flex flex-wrap justify-content-center justify-content-md-between">
+                <div class="single_brand ">
+                    <img src="{% static 'assets/images/brand-1.png' %}" alt="brand">
+                </div> <!-- single brand -->
+                <div class="single_brand">
+                    <img src="{% static 'assets/images/brand-2.png' %}" alt="brand">
+                </div> <!-- single brand -->
+                <div class="single_brand">
+                    <img src="{% static 'assets/images/brand-3.png' %}" alt="brand">
+                </div> <!-- single brand -->
+                <div class="single_brand">
+                    <img src="{% static 'assets/images/brand-4.png' %}" alt="brand">
+                </div> <!-- single brand -->
+                <div class="single_brand">
+                    <img src="{% static 'assets/images/brand-5.png' %}" alt="brand">
+                </div> <!-- single brand -->
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== BRAND PART ENDS ======-->
+
+    <!--====== ABOUT PART START ======-->
+
+    <section id="about" class="about_area pt-50">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="about_image mt-50">
+                        <img src="{% static 'assets/images/about.jpg' %}" alt="about image">
+                        <div class="experiance d-flex justify-content-center align-items-center text-center wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.2s">
+                            <div class="experiance_wrapper text-center">
+                                <span>25</span>
+                                <p>Years of Experiance</p>
+                            </div>
+                        </div>
+                        <div class="about_shape">
+                            <img src="{% static 'assets/images/shape-1.svg' %}" alt="shape">
+                        </div> <!-- about shape -->
+                    </div> <!-- about image -->
+                </div>
+                <div class="col-lg-5">
+                    <div class="about_content mt-45">
+                        <div class="section_title">
+                            <h4 class="sub_title">About Us</h4>
+                            <h3 class="title">Financio is Trusted by 36,817+ Businesses Worldwide.</h3>
+                        </div> <!-- section title -->
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, seawd Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt .</p>
+                        
+                        <div class="about_skills pt-15">
+                            <div class="skill_item mt-20">
+                                <div class="skill_header">
+                                    <h6 class="skill_title">Finance</h6>
+                                    <div class="skill_percentage">
+                                        <p><span class="counter">85</span>%</p>
+                                    </div>
+                                </div>
+                                <div class="skill_bar">
+                                    <div class="bar_inner">
+                                        <div class="bar progress_line" data-width="85"></div>
+                                    </div>
+                                </div>
+                            </div> <!-- skill item -->
+                            <div class="skill_item mt-20">
+                                <div class="skill_header">
+                                    <h6 class="skill_title">TAX</h6>
+                                    <div class="skill_percentage">
+                                        <p><span class="counter">75</span>%</p>
+                                    </div>
+                                </div>
+                                <div class="skill_bar">
+                                    <div class="bar_inner">
+                                        <div class="bar progress_line" data-width="75"></div>
+                                    </div>
+                                </div>
+                            </div> <!-- skill item -->
+                            <div class="skill_item mt-20">
+                                <div class="skill_header">
+                                    <h6 class="skill_title">Investment</h6>
+                                    <div class="skill_percentage">
+                                        <p><span class="counter">90</span>%</p>
+                                    </div>
+                                </div>
+                                <div class="skill_bar">
+                                    <div class="bar_inner">
+                                        <div class="bar progress_line" data-width="90"></div>
+                                    </div>
+                                </div>
+                            </div> <!-- skill item -->
+                            <div class="skill_item mt-20">
+                                <div class="skill_header">
+                                    <h6 class="skill_title">Growth</h6>
+                                    <div class="skill_percentage">
+                                        <p><span class="counter">65</span>%</p>
+                                    </div>
+                                </div>
+                                <div class="skill_bar">
+                                    <div class="bar_inner">
+                                        <div class="bar progress_line" data-width="65"></div>
+                                    </div>
+                                </div>
+                            </div> <!-- skill item -->
+                        </div> <!-- about skill -->
+                    </div>  <!-- about content -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== ABOUT PART ENDS ======-->
+
+    <!--====== SERVICES PART START ======-->
+
+    <section id="services" class="services_area pt-95">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section_title text-center pb-15">
+                        <h4 class="sub_title">Services</h4>
+                        <h3 class="title">We Offer Best Financial Consultancy Services in Affordable Cost</h3>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single_services text-center mt-30 wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.2s">
+                        <div class="services_icon">
+                            <i class="lni lni-user"></i>
+                        </div>
+                        <div class="services_content">
+                            <h4 class="services_title"><a href="#">Business Advising</a></h4>
+                            <p>Lorem ipsum dolor aconsetet dorem ipsum tempor inviduntsadipscing elitr, sed diamn numy eirmod tempor invidunt</p>
+                        </div>
+                    </div> <!-- single services -->
+                </div> 
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single_services text-center mt-30 wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.5s">
+                        <div class="services_icon">
+                            <i class="lni lni-write"></i>
+                        </div>
+                        <div class="services_content">
+                            <h4 class="services_title"><a href="#">Financial Planning</a></h4>
+                            <p>Lorem ipsum dolor aconsetet dorem ipsum tempor inviduntsadipscing elitr, sed diamn numy eirmod tempor invidunt</p>
+                        </div>
+                    </div> <!-- single services -->
+                </div> 
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single_services text-center mt-30 wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.8s">
+                        <div class="services_icon">
+                            <i class="lni lni-coin"></i>
+                        </div>
+                        <div class="services_content">
+                            <h4 class="services_title"><a href="#">Savings & Investments</a></h4>
+                            <p>Lorem ipsum dolor aconsetet dorem ipsum tempor inviduntsadipscing elitr, sed diamn numy eirmod tempor invidunt</p>
+                        </div>
+                    </div> <!-- single services -->
+                </div> 
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single_services text-center mt-30 wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.2s">
+                        <div class="services_icon">
+                            <i class="lni lni-invest-monitor"></i>
+                        </div>
+                        <div class="services_content">
+                            <h4 class="services_title"><a href="#">TAX Consultancy</a></h4>
+                            <p>Lorem ipsum dolor aconsetet dorem ipsum tempor inviduntsadipscing elitr, sed diamn numy eirmod tempor invidunt</p>
+                        </div>
+                    </div> <!-- single services -->
+                </div> 
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single_services text-center mt-30 wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.5s">
+                        <div class="services_icon">
+                            <i class="lni lni-investment"></i>
+                        </div>
+                        <div class="services_content">
+                            <h4 class="services_title"><a href="#">Risk Management</a></h4>
+                            <p>Lorem ipsum dolor aconsetet dorem ipsum tempor inviduntsadipscing elitr, sed diamn numy eirmod tempor invidunt</p>
+                        </div>
+                    </div> <!-- single services -->
+                </div> 
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single_services text-center mt-30 wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.8s">
+                        <div class="services_icon">
+                            <i class="lni lni-graph"></i>
+                        </div>
+                        <div class="services_content">
+                            <h4 class="services_title"><a href="#">Trade & Stock</a></h4>
+                            <p>Lorem ipsum dolor aconsetet dorem ipsum tempor inviduntsadipscing elitr, sed diamn numy eirmod tempor invidunt</p>
+                        </div>
+                    </div> <!-- single services -->
+                </div> 
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== SERVICES PART ENDS ======-->
+
+
+
+    <!--====== FOOTER PART START ======-->
+
+    <footer id="footer" class="footer_area">
+        <div class="container">
+            <div class="footer_wrapper pt-50 pb-100">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 order-md-1 order-lg-1">
+                        <div class="footer_about mt-50">
+                            <a href="#">
+                                <img src="{% static 'assets/images/logo.png' %}" alt="">
+                            </a>
+                            <p>Lorem ipsum dolor sitco nsetetu nonumy eirmod tempor invidunt ut labore etert dolore magna uyam Lorem ipsum dolor sitco nsetetu.</p>
+                            <ul class="social">
+                                <li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="#"><i class="lni lni-instagram-original"></i></a></li>
+                                <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                            </ul>
+                        </div> <!-- footer about -->
+                    </div>
+                    <div class="col-lg-5 col-md-12 order-md-3 order-lg-2">
+                        <div class="footer_link_wrapper d-flex flex-wrap">
+                            <div class="footer_link mt-45">
+                                <h4 class="footer_title">Quick Link</h4>
+                                <ul class="link">
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">About</a></li>
+                                </ul>
+                            </div> <!-- footer link -->
+                            <div class="footer_link mt-45">
+                                <h4 class="footer_title">Terms</h4>
+                                <ul class="link">
+                                    <li><a href="#">Community</a></li>
+                                    <li><a href="#">Our Advisors</a></li>
+                                    <li><a href="#">Jobs</a></li>
+                                    <li><a href="#">Terms</a></li>
+                                    <li><a href="#">Policy</a></li>
+                                </ul>
+                            </div> <!-- footer link -->
+                        </div> <!-- footer link wrapper -->
+                    </div>
+                    <div class="col-lg-4 col-md-6 order-md-2 order-lg-3">
+                        <div class="footer_form mt-45">
+                            <h4 class="footer_title">Get in Touch</h4>
+                            <form id="contact-form" action="">
+                                <div class="single_form">
+                                    <input type="text" placeholder="Name" name="Name">
+                                </div> <!-- single form -->
+                                <div class="single_form">
+                                    <input type="text" placeholder="Email" name="email">
+                                </div> <!-- single form -->
+                                <div class="single_form">
+                                    <textarea placeholder="Message" name="message"></textarea>
+                                </div> <!-- single form -->
+                                <p class="form-message"></p>
+                                <div class="single_form">
+                                    <button class="main-btn">Send</button>
+                                </div> <!-- single form -->
+                            </form>
+                        </div> <!-- footer form -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- footer wrapper -->
+                </div> <!-- container -->
+    </footer>
+
+    <!--====== FOOTER PART ENDS ======-->
+    
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="lni lni-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== PART START ======-->
+
+<!--
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+
+    <!--====== PART ENDS ======-->
+
+
+
+
+    <!--====== Jquery js ======-->
+    <script src="{% static 'assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/modernizr-3.7.1.min.js' %}"></script>
+    
+    <!--====== Bootstrap js ======-->
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    
+    <!--====== Slick js ======-->
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+    
+    
+    <!--====== Appear js ======-->
+    <script src="{% static 'assets/js/jquery.appear.min.js' %}"></script>
+    
+    <!--====== Scrolling Nav js ======-->
+    <script src="{% static 'assets/js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'assets/js/scrolling-nav.js' %}"></script>
+    
+    <!--====== wow js ======-->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    
+    <!--====== Main js ======-->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    
+</body>
+
+</html>
